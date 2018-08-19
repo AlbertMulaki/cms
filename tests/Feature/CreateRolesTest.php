@@ -59,4 +59,36 @@ class CreateRolesTest extends TestCase
     {
         $this->post('roles', $this->role)->assertRedirect('login');
     }
+
+    /** @test */
+    public function it_requires_a_name()
+    {
+        $this->signInAsSuperAdmin();
+
+        $this->role['name'] = null;
+
+        $this->post('roles', $this->role)->assertSessionHasErrors('name');
+    }
+
+    /** @test */
+    public function it_requires_a_unique_name()
+    {
+        $this->signInAsSuperAdmin();
+
+        Role::create(['name' => 'role']);
+
+        $this->role['name'] = 'role';
+
+        $this->post('roles', $this->role)->assertSessionHasErrors('name');
+    }
+
+    /** @test */
+    public function it_requires_the_name_to_not_be_longer_than_255_characters()
+    {
+        $this->signInAsSuperAdmin();
+
+        $this->role['name'] = str_repeat('a', 256);
+
+        $this->post('roles', $this->role)->assertSessionHasErrors('name');
+    }
 }
