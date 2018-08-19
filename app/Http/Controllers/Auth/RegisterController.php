@@ -69,4 +69,24 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    /**
+     * Do not show the registration form, as users are not allowed to log in.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return abort(404);        
+    }
+
+    /**
+     * Do not allow a user to register.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function register()
+    {
+        return abort(404);
+    }
 }
