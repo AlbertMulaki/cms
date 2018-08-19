@@ -3,6 +3,6 @@
 return [
     'roles' => [
         'super-admin',
-        'Content Admin'
+        'content-admin'
     ]
 ];
