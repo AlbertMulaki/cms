@@ -107,6 +107,8 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Role::where('id', $id)->delete();
+
+        return redirect()->action('Admin\RolesController@index');
     }
 }
