@@ -17,7 +17,7 @@ class CreateRolesTest extends TestCase
     {
         parent::setUp();
 
-        $this->role = factory('App\Role')->raw();
+        $this->role = raw('App\Role');
     }
     
     /** @test */

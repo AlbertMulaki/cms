@@ -14,7 +14,7 @@ class LoginUserTest extends TestCase
     /** @test */
     public function a_user_can_log_in()
     {
-        $user = factory('App\User')->create([
+        $user = create('App\User', [
             'email' => 'albertmulaki@example.com',
         ]);
 

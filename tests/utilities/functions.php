@@ -1,16 +1,16 @@
 <?php
 
-function create($class, $attributes = [], $times = 1)
+function create($class, $attributes = [], $times = '')
 {
-    return factory($class, $times)->create($attributes);
+    return factory($class)->create($attributes);
 }
 
-function make($class, $attributes = [], $times = 1)
+function make($class, $attributes = [], $times = '')
 {
     return factory($class, $times)->make($attributes);
 }
 
-function raw($class, $attributes = [], $times = 1)
+function raw($class, $attributes = [])
 {
-    return factory($class, $times)->raw($attributes);
+    return factory($class)->raw($attributes);
 }
