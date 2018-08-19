@@ -80,12 +80,20 @@ class RolesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'unique:roles,name', 'max:255']
+        ]);
+
+        $role->update([
+            'name' => $request->name
+        ]);
+
+        return redirect()->action('Admin\RolesController@index');
     }
 
     /**

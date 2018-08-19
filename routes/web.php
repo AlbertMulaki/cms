@@ -20,4 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('roles', 'Admin\RolesController@index');
+Route::put('roles/{role}', 'Admin\RolesController@update');
 Route::post('roles', 'Admin\RolesController@store')->middleware('auth');
