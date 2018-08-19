@@ -14,4 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/roles', 'Admin\RolesController@store')->middleware('auth');
 Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
