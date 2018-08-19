@@ -51,7 +51,8 @@ class RolesController extends Controller
         Role::create([
             'name' => $request->name,
         ]);
-        
+    
+        return redirect()->action('Admin\RolesController@index');
     }
 
     /**
@@ -68,12 +69,14 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        return view('admin.roles.edit',[
+            'role' => $role
+        ]);
     }
 
     /**

@@ -49,6 +49,38 @@ class UpdateRolesTest extends TestCase
     }
 
     /** @test */
+    public function super_admin_can_view_the_edit_form_of_the_role()
+    {
+        $this->signInAsSuperAdmin();
+
+        $role = create('App\Role', ['name' => 'admin']);
+
+        $this->get('roles/' . $role->id . '/edit', $role->toArray())
+            ->assertSuccessful()
+            ->assertSee($role->name);
+    }
+
+    /** @test */
+    public function non_super_admin_user_can_not_view_the_edit_form_of_the_role()
+    {
+        $this->signInAsContentAdmin();
+
+        $role = create('App\Role', ['name' => 'admin']);
+
+        $this->get('roles/' . $role->id . '/edit', $role->toArray())
+            ->assertStatus(Response::HTTP_FORBIDDEN);
+    }
+
+    /** @test */
+    public function guests_cannot_view_the_edit_form_of_the_role()
+    {
+        $role = create('App\Role', ['name' => 'admin']);
+
+        $this->get('roles/' . $role->id . '/edit', $role->toArray())
+            ->assertRedirect('login');
+    }
+
+    /** @test */
     public function it_requires_a_name()
     {
         $this->signInAsSuperAdmin();

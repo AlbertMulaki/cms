@@ -25,7 +25,7 @@ class CreateRolesTest extends TestCase
     {
         $this->signInAsSuperAdmin();
 
-        $this->post('roles', $this->role)->assertSuccessful();
+        $this->post('roles', $this->role)->assertRedirect('roles');
 
         $this->assertDatabaseHas('roles', $this->role);
     }
