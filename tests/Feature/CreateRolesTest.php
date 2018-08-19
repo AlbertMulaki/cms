@@ -41,9 +41,7 @@ class CreateRolesTest extends TestCase
     /** @test */
     public function users_with_no_role_at_all_cannot_add_a_new_role()
     {
-        $user = factory('App\User')->create();
-
-        $this->actingAs($user);
+        $this->signInWithNoRole();
 
         $this->post('roles', $this->role)->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -51,9 +49,7 @@ class CreateRolesTest extends TestCase
     /** @test */
     public function unauthorized_users_cannot_create_a_new_role()
     {
-        $user = factory('App\User')->create();
-
-        $this->actingAs($user);
+        $this->signInAsContentAdmin();
  
         $this->post('roles', $this->role)->assertStatus(Response::HTTP_FORBIDDEN);
     }

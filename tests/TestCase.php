@@ -10,6 +10,20 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
 
     /**
+     * Sign in a user
+     *
+     * @param App\User $user
+     */
+    protected function signInWithNoRole($user = null)
+    {
+        $user = $user?: factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        return $this;
+    }
+    
+    /**
      * Sign in as a super admin user.
      *
      * @param App\User $user
